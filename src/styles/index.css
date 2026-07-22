@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+ * Design tokens — traducción directa de docs/DESIGN_SYSTEM.md §10.
+ * Tailwind v4 genera utilidades (bg-primary, text-on-surface, rounded-lg...)
+ * directamente desde estas custom properties. El cambio de tema NO cambia
+ * clases: cambia el VALOR de la variable bajo [data-theme="dark"], así que
+ * cualquier componente que use `bg-surface-container-low` ya es dark-mode-safe
+ * sin escribir una sola clase `dark:`.
+ * ------------------------------------------------------------------ */
+@theme {
+  /* Tipografía */
+  --font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --text-display-lg: 2.5rem;
+  --text-display-lg--line-height: 1.1;
+  --text-display-md: 2.25rem;
+  --text-display-md--line-height: 1.12;
+  --text-display-sm: 2rem;
+  --text-display-sm--line-height: 1.15;
+  --text-headline-lg: 1.75rem;
+  --text-headline-lg--line-height: 1.2;
+  --text-headline-md: 1.5rem;
+  --text-headline-md--line-height: 1.25;
+  --text-headline-sm: 1.25rem;
+  --text-headline-sm--line-height: 1.3;
+  --text-title-lg: 1.125rem;
+  --text-title-lg--line-height: 1.35;
+  --text-title-md: 1rem;
+  --text-title-md--line-height: 1.4;
+  --text-title-sm: 0.9375rem;
+  --text-title-sm--line-height: 1.4;
+  --text-body-lg: 1rem;
+  --text-body-lg--line-height: 1.5;
+  --text-body-md: 0.875rem;
+  --text-body-md--line-height: 1.5;
+  --text-body-sm: 0.8125rem;
+  --text-body-sm--line-height: 1.45;
+  --text-label-lg: 0.875rem;
+  --text-label-lg--line-height: 1.3;
+  --text-label-md: 0.75rem;
+  --text-label-md--line-height: 1.3;
+  --text-label-sm: 0.6875rem;
+  --text-label-sm--line-height: 1.3;
+
+  /* Forma (shape scale) */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Elevación (solo claro, ver override en dark más abajo) */
+  --shadow-1: 0 1px 2px rgba(16, 24, 40, 0.04);
+  --shadow-2: 0 2px 8px rgba(16, 24, 40, 0.06);
+  --shadow-3: 0 4px 16px rgba(16, 24, 40, 0.08);
+  --shadow-4: 0 8px 24px rgba(16, 24, 40, 0.1);
+  --shadow-5: 0 16px 40px rgba(16, 24, 40, 0.14);
+
+  /* Color — roles de sistema (valores por defecto = tema claro) */
+  --color-primary: #d4ff3f;
+  --color-on-primary: #1a2100;
+  --color-primary-container: #e9ff8f;
+  --color-on-primary-container: #1a2100;
+
+  --color-secondary: #254e7d;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #d2e3f5;
+  --color-on-secondary-container: #0a1830;
+
+  --color-tertiary: #544096;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #dbd5fd;
+  --color-on-tertiary-container: #190e33;
+
+  --color-error: #a82824;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffd5d6;
+  --color-on-error-container: #3a0a0a;
+
+  --color-background: #f7f8fa;
+  --color-on-background: #12151a;
+
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f7f8fa;
+  --color-surface-container: #f5f6f8;
+  --color-surface-container-high: #f1f3f5;
+  --color-surface-container-highest: #edeff2;
+
+  --color-on-surface: #12151a;
+  --color-on-surface-variant: #6b7280;
+  --color-outline: #e7e9ec;
+  --color-outline-variant: #f1f3f5;
+
+  /* Color — dominio */
+  --color-physical: #ff8a3d;
+  --color-technical: #2f8fff;
+  --color-tactical: #8b6df2;
+  --color-recovery: #8b7cf6;
+  --color-nutrition: #ffb020;
+  --color-match: #12b76a;
+}
+
+/* Tema oscuro — mismas variables, valores distintos. Ver DESIGN_SYSTEM.md §5.1:
+ * en oscuro no hay sombra, la elevación se comunica con borde/glow. */
+:root[data-theme="dark"] {
+  --color-primary: #d4ff3f;
+  --color-on-primary: #1a2100;
+  --color-primary-container: #3f4f00;
+  --color-on-primary-container: #e9ff8f;
+
+  --color-secondary: #9cbee6;
+  --color-on-secondary: #122842;
+  --color-secondary-container: #1b3a5e;
+  --color-on-secondary-container: #d2e3f5;
+
+  --color-tertiary: #b3a9fa;
+  --color-on-tertiary: #2b1d54;
+  --color-tertiary-container: #3f2e75;
+  --color-on-tertiary-container: #dbd5fd;
+
+  --color-error: #ff9b9e;
+  --color-on-error: #5c1210;
+  --color-error-container: #821d1b;
+  --color-on-error-container: #ffd5d6;
+
+  --color-background: #0b0e11;
+  --color-on-background: #f5f6f8;
+
+  --color-surface-container-lowest: #0b0e11;
+  --color-surface-container-low: #12151a;
+  --color-surface-container: #171b21;
+  --color-surface-container-high: #1f242c;
+  --color-surface-container-highest: #2a3038;
+
+  --color-on-surface: #f5f6f8;
+  --color-on-surface-variant: #9aa3af;
+  --color-outline: #2a3038;
+  --color-outline-variant: #1f242c;
+
+  --color-physical: #ff9d5c;
+  --color-technical: #57a6ff;
+  --color-tactical: #a38bf9;
+  --color-recovery: #a79af8;
+  --color-nutrition: #ffc24d;
+  --color-match: #2fd98a;
+
+  --shadow-1: none;
+  --shadow-2: none;
+  --shadow-3: none;
+  --shadow-4: none;
+  --shadow-5: none;
+}
+
+/* Motion tokens (no generan utilidades Tailwind, se leen directo en JS/Framer Motion) */
+:root {
+  --f7-duration-fast: 0.14s;
+  --f7-duration-base: 0.25s;
+  --f7-duration-slow: 0.8s;
+  --f7-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --f7-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@layer base {
+  html {
+    color-scheme: light dark;
+  }
+  body {
+    @apply bg-background text-on-surface font-body antialiased;
+  }
+  #root {
+    min-height: 100dvh;
+  }
+}
